@@ -12,9 +12,9 @@ jobs:
       - name: Upload files
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          server: ${{ 203.0.113.42 }}     # e.g. 203.0.113.42 (your VPS IP)
-          username: ${{ root}}   # e.g. ubuntu
-          ssh_private_key: ${{ @1Diomaster20 }} # your private key (add the public key to ~/.ssh/authorized_keys on the VPS)
+          server: ${{ secrets.203.0.113.42 }}     # e.g. 203.0.113.42 (your VPS IP)
+          username: ${{ secrets.root}}   # e.g. ubuntu
+          ssh_private_key: ${{ secrets.@1Diomaster20 }} # your private key (add the public key to ~/.ssh/authorized_keys on the VPS)
           local_path: .
           remote_path: /var/www/html/phpform
           delete_remote_files: false
