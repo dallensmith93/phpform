@@ -1,20 +1,20 @@
-name: Deploy to cPanel via FTP
+name: Deploy via SFTP
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: FTP Deploy
-        uses: SamKirkland/FTP-Deploy-Action@v4
+      - name: Upload files
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_PATH }}
-          local-dir: .
-          exclude: |
-            **/.git*
-            **/.github/**
+          server: ${{ 203.0.113.42 }}     # e.g. 203.0.113.42 (your VPS IP)
+          username: ${{ root}}   # e.g. ubuntu
+          ssh_private_key: ${{ @1Diomaster20 }} # your private key (add the public key to ~/.ssh/authorized_keys on the VPS)
+          local_path: .
+          remote_path: /var/www/html/phpform
+          delete_remote_files: false
